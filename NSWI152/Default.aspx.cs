@@ -11,7 +11,7 @@ namespace NSWI152
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            MyLabel.Text = "Hello World from Azure.\nHere is new change!";
+            MyLabel.Text = "Hello World from Azure.\nHere is new change!\n New commit via Github!";
         }
     }
 }
