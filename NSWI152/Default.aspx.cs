@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,9 +13,37 @@ namespace NSWI152
 {
     public partial class Default : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void GoButton_Click(object sender, EventArgs e)
         {
-            MyLabel.Text = "Hello World from Azure.\nHere is new change!\n New commit via Github!";
+            if (MyFileUpload.HasFile)
+            {
+                var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageAccountConnectionString"].ConnectionString);
+                var blobClient = storageAccount.CreateCloudBlobClient();
+                var containerReference = blobClient.GetContainerReference("test"); // name of your container
+
+                var blobReference = containerReference.GetBlockBlobReference(MyFileUpload.FileName);
+                blobReference.UploadFromStream(MyFileUpload.FileContent);
+            }
+        }
+        protected override void OnPreRender(EventArgs e)
+        {
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageAccountConnectionString"].ConnectionString);
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            var containerReference = blobClient.GetContainerReference("test");
+
+            var blobs = containerReference.ListBlobs();
+            FilesRepeater.DataSource = blobs;
+            FilesRepeater.DataBind();
+        }
+
+        protected void FileLink_Command(object sender, CommandEventArgs e)
+        {
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageAccountConnectionString"].ConnectionString);
+
+            var blobClient = storageAccount.CreateCloudBlobClient();
+
+            var blobReference = new CloudBlockBlob(new Uri((string)e.CommandArgument), blobClient);
+            blobReference.DownloadToStream(Response.OutputStream);
         }
     }
 }
