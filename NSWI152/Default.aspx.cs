@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using Microsoft.Azure.Storage.Queue;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,6 +45,33 @@ namespace NSWI152
 
             var blobReference = new CloudBlockBlob(new Uri((string)e.CommandArgument), blobClient);
             blobReference.DownloadToStream(Response.OutputStream);
+        }
+        protected void SendToQueueButton_Click(object sender, EventArgs e)
+        {
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageAccountConnectionString"].ConnectionString);
+
+            var queueClient = storageAccount.CreateCloudQueueClient();
+            var queueReference = queueClient.GetQueueReference("test"); // your queue name
+
+            var message = new CloudQueueMessage(QueueMessageTB.Text);
+            queueReference.AddMessage(message);
+        }
+        protected void GetMessageButton_Click(object sender, EventArgs e)
+        {
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageAccountConnectionString"].ConnectionString);
+            var queueClient = storageAccount.CreateCloudQueueClient();
+            var queueReference = queueClient.GetQueueReference("test"); // your queue name
+
+            var message = queueReference.GetMessage();
+            if (message != null)
+            {
+                QueueMessageLb.Text = message.AsString;
+                queueReference.DeleteMessage(message);
+            }
+            else
+            {
+                QueueMessageLb.Text = "No message returned...";
+            }
         }
     }
 }

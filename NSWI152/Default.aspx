@@ -18,6 +18,11 @@
  		        <asp:LinkButton ID="FileLink" CommandArgument="<%# Item.Uri %>" Text="<%# Item.Uri %>" OnCommand="FileLink_Command" runat="server" /><br />
  	        </ItemTemplate>
          </asp:Repeater>
+        <asp:TextBox ID="QueueMessageTB" runat="server" />
+        <asp:Button ID="SendToQueueButton" Text="Send to Queue" OnClick="SendToQueueButton_Click" runat="server" />
+
+        <asp:Label ID="QueueMessageLb" runat="server" />
+        <asp:Button ID="GetMessageButton" Text="Get from Queue" OnClick="GetMessageButton_Click" runat="server" />
     </form>
 </body>
 </html>
