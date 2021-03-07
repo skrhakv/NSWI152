@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBus2", "ServiceBus2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisCache1", "RedisCache1\RedisCache1.csproj", "{AFD4DDA9-EE29-4867-99EC-FB1DCAB848C3}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "LogicApp", "LogicApp\LogicApp.deployproj", "{78D462F9-DCF4-4CE1-AE02-DEECF0B2787C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AFD4DDA9-EE29-4867-99EC-FB1DCAB848C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFD4DDA9-EE29-4867-99EC-FB1DCAB848C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFD4DDA9-EE29-4867-99EC-FB1DCAB848C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D462F9-DCF4-4CE1-AE02-DEECF0B2787C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D462F9-DCF4-4CE1-AE02-DEECF0B2787C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D462F9-DCF4-4CE1-AE02-DEECF0B2787C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D462F9-DCF4-4CE1-AE02-DEECF0B2787C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

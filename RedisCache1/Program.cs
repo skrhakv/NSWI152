@@ -14,7 +14,7 @@ namespace RedisCache1
         {
             cachingGet("Message");
 
-            cachingSet("Message", "Hello! The cache is working from a .NET console app!");
+            cachingSet("Message", "HelloWorld!");
 
             cachingGet("Message");
 
